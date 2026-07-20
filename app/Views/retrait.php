@@ -89,19 +89,7 @@
         <p>Numero : <?= esc($prefixe['num']) ?><?= esc($client[0]['num']) ?></p>
         <p>Votre solde actuel est : <strong><?= esc($client[0]['solde']) ?> Ar</strong></p>
 
-        <!-- <section class="section" id="depot">
-            <h2>Faire un dépôt</h2>
-            <form action="/deposer" method="post">
-                <?= csrf_field() ?>
-                <div class="form-group">
-                    <label for="montant_depot">Montant (Ar)</label>
-                    <input type="number" id="montant_depot" name="montant" min="1" step="1" required>
-                </div>
-                <button type="submit" class="btn-submit">Valider</button>
-            </form>
-        </section> -->
-
-        <!-- <section class="section" id="retrait">
+        <section class="section" id="retrait">
             <h2>Faire un retrait</h2>
             <form action="/retrait" method="post">
                 <?= csrf_field() ?>
@@ -111,7 +99,7 @@
                 </div>
                 <button type="submit" class="btn-submit">Valider</button>
             </form>
-        </section> -->
+        </section>
     </main>
 </body>
 </html>
