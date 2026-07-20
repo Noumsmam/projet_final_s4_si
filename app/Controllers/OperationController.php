@@ -29,6 +29,15 @@ class OperationController extends BaseController
         return view('retrait', ['client' => $client, 'prefixe' => $prefixe]);
     }
 
+    function pageTransfert(){
+        $clientModel = new Client();
+        $prefixeModel = new Prefixe();
+        $client = $clientModel->find(session()->get('id'));
+        $prefixe = $prefixeModel->find($client[0]['id_prefixe']);
+
+        return view('transfert', ['client' => $client, 'prefixe' => $prefixe]);
+    }
+
     function depot(){
         $id = session()->get('id');
         $montant = $this->request->getPost('montant');
@@ -94,7 +103,9 @@ class OperationController extends BaseController
         |
         v
     */
-    public function  transfert($client2,$montant){
+    public function  transfert(){
+        $numClient2 = $this->request->getPost('numClient2');
+        $montant = (float) $this->request->getPost('montant');
         $id = session()->get('id');
         $client = new Client();
         $clientInf1 = $client->find($id);
@@ -124,17 +135,21 @@ class OperationController extends BaseController
             'id_operation' => 3
         ]);
 
-        $clientInf2 = $client->find($id);
+        $prefixeModel = new Prefixe();
+        $pre2=substr($numClient2, 0, 3);
+        $prefixe = $prefixeModel->where('num', $pre2)->first();
+        $numero2=substr($numClient2, 3);
+        $clientInf2 = $client->where('num', $numero2)->first();
         if (!$clientInf2) {
             return redirect()->back()->with('error', 'Client introuvable.');
         }
         
-        $soldeActuel = (float) $clientInf2[0]['solde'];
+        $soldeActuel = (float) $clientInf2['solde'];
         $nouveauSolde = $soldeActuel + $montant;
-        $client->update($clientInf2[0]['id'], ['solde' => $nouveauSolde]);
+        $client->update($clientInf2['id'], ['solde' => $nouveauSolde]);
         $historiqueModel = new Historique_transaction();
         $historiqueModel->save([
-            'id_client'    => $clientInf2[0]['id'],
+            'id_client'    => $clientInf2['id'],
             'montant'      => $montant,
             'id_operation' => 3
         ]);
@@ -143,6 +158,7 @@ class OperationController extends BaseController
         $compteOpInfo = $compte_operateur->find(1);
         $soldeOp = $montantFrais + $compteOpInfo['solde'];
         $compte_operateur->update(1,['solde' => $soldeOp]);
+        return redirect()->to('/transfert')->with('success', 'Transfert effectué avec succès.');
     } 
 
     function historique(){
