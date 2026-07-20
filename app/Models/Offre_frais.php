@@ -9,7 +9,7 @@ use CodeIgniter\Model;
         protected $allowedFields = ['id_offre','id_frais'];
 
         function getFrais($id) {
-            $db = $db = \Config\Database::connect();
+            $db = \Config\Database::connect();
             $sql = "SELECT frais.montant FROM frais JOIN offre_frais.id_frais = frais.id
                     JOIN offre On offre.id = offre_frais.id_offre WHERE offre_frais.id_frais=$id";
             $query = $db->query($sql);
