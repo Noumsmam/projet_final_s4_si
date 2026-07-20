@@ -6,12 +6,5 @@ use CodeIgniter\Model;
     {
         protected $table = 'Client';
         protected $primaryKey = 'id';
-        protected $allowedFields = ['id_prefixe','num','solde','nom'];
-<<<<<<< HEAD
-=======
-
-        function getNumById($id) {
-            
-        }
->>>>>>> nomena
+        protected $allowedFields = ['id_prefixe','numero','solde','nom'];
     }

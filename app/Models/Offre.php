@@ -7,4 +7,13 @@ use CodeIgniter\Model;
         protected $table = 'offre';
         protected $primaryKey = 'id';
         protected $allowedFields = ['montant_debut','montant_fin'];
+
+        function checkOffre($montant) {
+            $db = \Config\Database::connect();
+            $sql = "SELECT id FROM offre WHERE offre.montant_debut < $montatn
+                    AND offre.montant_fin > $montant";
+            $query = $db->query($sql);
+            $result = $query->getResultArray();
+            return $result;
+        }
     }
