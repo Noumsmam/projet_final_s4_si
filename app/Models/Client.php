@@ -6,7 +6,7 @@ use CodeIgniter\Model;
     {
         protected $table = 'Client';
         protected $primaryKey = 'id';
-        protected $allowedFields = ['id_prefixe','numero','solde','nom'];
+        protected $allowedFields = ['id_prefixe','num','solde','nom'];
 
         public function checkSolde($id,$montant) {
             $client = new Client();
@@ -21,8 +21,9 @@ use CodeIgniter\Model;
 
         public function getSituationClient() {
             $db = \Config\Database::connect();       
-            $sql = "SELECT Client.id,Client.nom,Client.num,Client.solde 
-                    Prefixe.num FROM Client JOIN prefixe ON Client.id_prefixe = prefixe.id";
+            $sql = "SELECT Client.id, Client.nom, Client.num, Client.solde, Client.id_prefixe,
+                    Prefixe.num AS prefixe_num
+                    FROM Client JOIN prefixe ON Client.id_prefixe = prefixe.id";
             $query = $db->query($sql);
             $result = $query->getResultArray();
             return $result;

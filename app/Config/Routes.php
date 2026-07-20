@@ -16,5 +16,13 @@ use CodeIgniter\Router\RouteCollection;
         $routes->post('deposer', 'OperationController::depot');
         $routes->post('retrait', 'OperationController::retrait');
         $routes->get('historique', 'OperationController::historique');
+        $routes->get('transfert', 'OperationController::pageTransfert');
+        $routes->post('transfert', 'OperationController::transfert');
+        $routes->get('gestion-clients', 'PageController::getSituationAllCompte');
+        $routes->get('gestion-clients/creer', 'ClientController::create');
+        $routes->post('gestion-clients/creer', 'ClientController::store');
+        $routes->get('gestion-clients/modifier/(:num)', 'ClientController::edit/$1');
+        $routes->post('gestion-clients/modifier/(:num)', 'ClientController::update/$1');
+        $routes->post('gestion-clients/supprimer/(:num)', 'ClientController::delete/$1');
     });
     

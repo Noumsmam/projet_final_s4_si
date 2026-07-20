@@ -19,7 +19,9 @@ class PageController extends BaseController
     public function getSituationAllCompte() {
         $client = new Client();
         $listeClient = $client->getSituationClient();
-    } 
+
+        return view('clients/index', ['clients' => $listeClient]);
+    }
 
     public function getAllTransfert() {
         
