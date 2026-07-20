@@ -157,4 +157,15 @@ class OperationController extends BaseController
             'id_operation' => 3
         ]);
     } 
+
+    function historique(){
+        $clientModel = new Client();
+        $prefixeModel = new Prefixe();
+        $id = session()->get('id');
+        $client = $clientModel->find($id);
+        $prefixe = $prefixeModel->find($client[0]['id_prefixe']);
+        $historiqueModel = new Historique_transaction();
+        $historique = $historiqueModel->getHistoriqueByClient($client[0]['id']);
+        return view('historique', ['historique' => $historique, 'client' => $client, 'prefixe' => $prefixe]);
+    }
 }

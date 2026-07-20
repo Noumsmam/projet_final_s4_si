@@ -10,7 +10,7 @@ use CodeIgniter\Model;
 
         public function getHistoriqueByClient($id) {
             $db = \Config\Database::connect();
-            $sql = "SELECT histo_transcaction.id,histo_transcaction.montant,operation.type 
+            $sql = "SELECT histo_transcaction.id,histo_transcaction.montant,operation.type, Client.nom, Client.num 
                     FROM histo_transcaction JOIN operation ON operation.id = histo_transcaction.id_operation
                     JOIN Client ON Client.id = histo_transcaction.id_client WHERE histo_transcaction.id_client = ?";
             $query = $db->query($sql,[$id]);

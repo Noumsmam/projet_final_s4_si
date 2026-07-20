@@ -15,5 +15,6 @@ use CodeIgniter\Router\RouteCollection;
         $routes->get('retrait', 'OperationController::pageRetrait');
         $routes->post('deposer', 'OperationController::depot');
         $routes->post('retrait', 'OperationController::retrait');
+        $routes->get('historique', 'OperationController::historique');
     });
     
