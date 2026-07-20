@@ -9,6 +9,9 @@ DROP TABLE IF EXISTS offre;
 DROP TABLE IF EXISTS frais;
 DROP TABLE IF EXISTS offre_frais;
 DROP TABLE IF EXISTS compte_operateur;
+DROP TABLE IF EXISTS operateur;
+DROP TABLE IF EXISTS operateur_prefixe;
+DROP TABLE IF EXISTS commission_operateur;
 
 -- 1. Table prefixe
 CREATE TABLE IF NOT EXISTS prefixe (
@@ -69,6 +72,24 @@ CREATE TABLE IF NOT EXISTS compte_operateur (
     id_prefixe INTEGER NOT NULL,
     solde REAL DEFAULT 0.0,
     FOREIGN KEY (id_prefixe) REFERENCES prefixe(id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS operateur(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nom TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS operateur_prefixe(
+    id_operateur INTEGER NOT NULL,
+    id_prefixe INTEGER NOT NULL,
+    FOREIGN KEY (id_operateur) REFERENCES operateur(id),
+    FOREIGN KEY (id_prefixe) REFERENCES prefixe(id)
+);
+
+CREATE TABLE IF NOT EXISTS commission_operateur (
+    id_operateur INTEGER NOT NULL,
+    commission REAL DEFAULT 0.0,
+    FOREIGN KEY (id_operateur) REFERENCES operateur(id)
 );
 
 -- Transaction pour garantir l'intégrité des insertions
