@@ -1,0 +1,115 @@
+CRITICAL - 2026-04-15 06:51:19 --> TypeError: count(): Argument #1 ($value) must be of type Countable|array, null given
+[Method: GET, Route: /]
+in APPPATH/Views/listeEtu.php on line 9.
+ 1 SYSTEMPATH/View/View.php(240): include()
+ 2 SYSTEMPATH/View/View.php(243): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 3 SYSTEMPATH/Common.php(1250): CodeIgniter\View\View->render()
+ 4 APPPATH/Controllers/EtudiantController.php(12): view()
+ 5 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\EtudiantController->etu()
+ 6 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 7 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 8 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+10 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+CRITICAL - 2026-04-15 06:51:19 --> [Caused by] ErrorException: Undefined variable $Etudiant
+in APPPATH/Views/listeEtu.php on line 9.
+ 1 APPPATH/Views/listeEtu.php(9): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(240): include('/opt/lampp/htdocs/TPrapide/app/Views/listeEtu.php')
+ 3 SYSTEMPATH/View/View.php(243): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1250): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/EtudiantController.php(12): view()
+ 6 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\EtudiantController->etu()
+ 7 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 9 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+11 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+ERROR - 2026-04-15 07:46:40 --> Error connecting to the database: mysqli_sql_exception: No such file or directory in /opt/lampp/htdocs/TPrapide/system/Database/MySQLi/Connection.php:201
+Stack trace:
+#0 /opt/lampp/htdocs/TPrapide/system/Database/MySQLi/Connection.php(201): mysqli->real_connect()
+#1 /opt/lampp/htdocs/TPrapide/system/Database/BaseConnection.php(555): CodeIgniter\Database\MySQLi\Connection->connect()
+#2 /opt/lampp/htdocs/TPrapide/system/Database/BaseConnection.php(795): CodeIgniter\Database\BaseConnection->initialize()
+#3 /opt/lampp/htdocs/TPrapide/system/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query()
+#4 /opt/lampp/htdocs/TPrapide/system/Model.php(253): CodeIgniter\Database\BaseBuilder->get()
+#5 /opt/lampp/htdocs/TPrapide/system/BaseModel.php(676): CodeIgniter\Model->doFindAll()
+#6 /opt/lampp/htdocs/TPrapide/app/Controllers/EtudiantController.php(11): CodeIgniter\BaseModel->findAll()
+#7 /opt/lampp/htdocs/TPrapide/system/CodeIgniter.php(951): App\Controllers\EtudiantController->etu()
+#8 /opt/lampp/htdocs/TPrapide/system/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+#9 /opt/lampp/htdocs/TPrapide/system/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+#10 /opt/lampp/htdocs/TPrapide/system/Boot.php(417): CodeIgniter\CodeIgniter->run()
+#11 /opt/lampp/htdocs/TPrapide/system/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+#12 /opt/lampp/htdocs/TPrapide/public/index.php(59): CodeIgniter\Boot::bootWeb()
+#13 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: No such file or directory in /opt/lampp/htdocs/TPrapide/system/Database/MySQLi/Connection.php:231
+Stack trace:
+#0 /opt/lampp/htdocs/TPrapide/system/Database/BaseConnection.php(555): CodeIgniter\Database\MySQLi\Connection->connect()
+#1 /opt/lampp/htdocs/TPrapide/system/Database/BaseConnection.php(795): CodeIgniter\Database\BaseConnection->initialize()
+#2 /opt/lampp/htdocs/TPrapide/system/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query()
+#3 /opt/lampp/htdocs/TPrapide/system/Model.php(253): CodeIgniter\Database\BaseBuilder->get()
+#4 /opt/lampp/htdocs/TPrapide/system/BaseModel.php(676): CodeIgniter\Model->doFindAll()
+#5 /opt/lampp/htdocs/TPrapide/app/Controllers/EtudiantController.php(11): CodeIgniter\BaseModel->findAll()
+#6 /opt/lampp/htdocs/TPrapide/system/CodeIgniter.php(951): App\Controllers\EtudiantController->etu()
+#7 /opt/lampp/htdocs/TPrapide/system/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+#8 /opt/lampp/htdocs/TPrapide/system/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+#9 /opt/lampp/htdocs/TPrapide/system/Boot.php(417): CodeIgniter\CodeIgniter->run()
+#10 /opt/lampp/htdocs/TPrapide/system/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+#11 /opt/lampp/htdocs/TPrapide/public/index.php(59): CodeIgniter\Boot::bootWeb()
+#12 {main}
+CRITICAL - 2026-04-15 07:46:40 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: No such file or directory
+[Method: GET, Route: /]
+in SYSTEMPATH/Database/BaseConnection.php on line 606.
+ 1 SYSTEMPATH/Database/BaseConnection.php(795): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH/Database/BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query()
+ 3 SYSTEMPATH/Model.php(253): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH/BaseModel.php(676): CodeIgniter\Model->doFindAll()
+ 5 APPPATH/Controllers/EtudiantController.php(11): CodeIgniter\BaseModel->findAll()
+ 6 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\EtudiantController->etu()
+ 7 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 9 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+11 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+CRITICAL - 2026-04-15 08:02:35 --> ErrorException: Trying to access array offset on null
+[Method: GET, Route: etu/0]
+in APPPATH/Views/info.php on line 6.
+ 1 APPPATH/Views/info.php(6): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(240): include('/opt/lampp/htdocs/TPrapide/app/Views/info.php')
+ 3 SYSTEMPATH/View/View.php(243): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1250): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/EtudiantController.php(18): view()
+ 6 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\EtudiantController->id()
+ 7 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 9 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+11 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+CRITICAL - 2026-04-15 08:03:30 --> ErrorException: Trying to access array offset on null
+[Method: GET, Route: etu/0]
+in APPPATH/Views/info.php on line 6.
+ 1 APPPATH/Views/info.php(6): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(240): include('/opt/lampp/htdocs/TPrapide/app/Views/info.php')
+ 3 SYSTEMPATH/View/View.php(243): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1250): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/EtudiantController.php(18): view()
+ 6 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\EtudiantController->id()
+ 7 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 9 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+11 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+CRITICAL - 2026-04-15 08:08:18 --> ErrorException: Undefined array key 0
+[Method: GET, Route: etu/1]
+in APPPATH/Views/info.php on line 6.
+ 1 APPPATH/Views/info.php(6): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(240): include('/opt/lampp/htdocs/TPrapide/app/Views/info.php')
+ 3 SYSTEMPATH/View/View.php(243): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1250): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/EtudiantController.php(18): view()
+ 6 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\EtudiantController->id()
+ 7 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 9 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+11 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
