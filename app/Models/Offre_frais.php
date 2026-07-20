@@ -18,7 +18,7 @@ class Offre_frais extends Model
                 FROM frais f
                 JOIN offre_frais of ON of.id_frais = f.id
                 JOIN offre o ON o.id = of.id_offre 
-                WHERE of.id_frais = ?";
+            WHERE of.id_offre = ?";
 
         $query = $db->query($sql, [$id]);
         
