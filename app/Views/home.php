@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>Mon Solde & Opérations</title>
     <style>
         * {
             box-sizing: border-box;
@@ -17,66 +17,64 @@
             min-height: 100vh;
         }
 
+        /* Utilisation de flexbox pour centrer le contenu au milieu de l'écran */
         .main-content {
             margin-left: 240px;
             padding: 2rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
-        .logout-link {
-            display: inline-block;
-            margin-top: 1rem;
-            color: #dc2626;
-            text-decoration: none;
-        }
-
-        .logout-link:hover {
-            text-decoration: underline;
-        }
-
-        .section {
-            margin-top: 2rem;
-            padding: 1.5rem;
+        .dashboard-card {
             background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
-            max-width: 420px;
-        }
-
-        .section h2 {
-            font-size: 1.25rem;
-            margin-bottom: 1rem;
-        }
-
-        .form-group {
-            margin-bottom: 1rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.35rem;
-            font-weight: 600;
-        }
-
-        .form-group input {
+            border-radius: 12px;
+            padding: 2rem;
             width: 100%;
-            padding: 0.6rem 0.75rem;
-            border: 1px solid #cbd5e1;
-            border-radius: 6px;
-            font-size: 1rem;
+            max-width: 450px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            text-align: center;
         }
 
-        .btn-submit {
-            padding: 0.6rem 1.25rem;
-            background: #1e293b;
-            color: #fff;
-            border: none;
-            border-radius: 6px;
-            font-size: 1rem;
-            cursor: pointer;
+        .user-info {
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 1rem;
         }
 
-        .btn-submit:hover {
-            background: #334155;
+        .user-info h1 {
+            font-size: 1.5rem;
+            color: #1e293b;
+            margin-bottom: 0.25rem;
+        }
+
+        .user-info .phone {
+            color: #64748b;
+            font-size: 0.95rem;
+        }
+
+        .balance-box {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 1.5rem 1rem;
+            text-align: center;
+        }
+
+        .balance-box label {
+            display: block;
+            font-size: 0.875rem;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+        }
+
+        .balance-box .amount {
+            font-size: 2.2rem;
+            font-weight: bold;
+            color: #0f172a;
         }
     </style>
 </head>
@@ -84,34 +82,21 @@
     <?= view('partials/sidebar') ?>
 
     <main class="main-content">
+        <div class="dashboard-card">
+            
+            <!-- Informations Client -->
+            <div class="user-info">
+                <h1>Bonjour, <?= esc($client[0]['nom']) ?> !</h1>
+                <p class="phone">N° <?= esc($prefixe['num']) ?><?= esc($client[0]['num']) ?></p>
+            </div>
 
-        <h1>Bonjour, <?= esc($client[0]['nom']) ?>!</h1>
-        <p>Numero : <?= esc($prefixe['num']) ?><?= esc($client[0]['num']) ?></p>
-        <p>Votre solde actuel est : <strong><?= esc($client[0]['solde']) ?> Ar</strong></p>
+            <!-- Solde Centralisé -->
+            <div class="balance-box">
+                <label>Solde actuel</label>
+                <div class="amount"><?= number_format($client[0]['solde'], 0, ',', ' ') ?> Ar</div>
+            </div>
 
-        <!-- <section class="section" id="depot">
-            <h2>Faire un dépôt</h2>
-            <form action="/deposer" method="post">
-                <?= csrf_field() ?>
-                <div class="form-group">
-                    <label for="montant_depot">Montant (Ar)</label>
-                    <input type="number" id="montant_depot" name="montant" min="1" step="1" required>
-                </div>
-                <button type="submit" class="btn-submit">Valider</button>
-            </form>
-        </section> -->
-
-        <!-- <section class="section" id="retrait">
-            <h2>Faire un retrait</h2>
-            <form action="/retrait" method="post">
-                <?= csrf_field() ?>
-                <div class="form-group">
-                    <label for="montant_retrait">Montant (Ar)</label>
-                    <input type="number" id="montant_retrait" name="montant" min="1" step="1" required>
-                </div>
-                <button type="submit" class="btn-submit">Valider</button>
-            </form>
-        </section> -->
+        </div>
     </main>
 </body>
 </html>

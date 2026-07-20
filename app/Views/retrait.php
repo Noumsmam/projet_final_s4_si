@@ -17,34 +17,46 @@
             min-height: 100vh;
         }
 
+        /* Alignement du contenu principal au centre de la page */
         .main-content {
-            margin-left: 240px;
+            margin-left: 240px; /* Conserve l'espace pour la sidebar */
+            min-height: 100vh;
             padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Centrage vertical */
+            align-items: center;     /* Centrage horizontal */
         }
 
-        .logout-link {
-            display: inline-block;
-            margin-top: 1rem;
-            color: #dc2626;
-            text-decoration: none;
+        .user-header {
+            text-align: center;
+            margin-bottom: 1rem;
         }
 
-        .logout-link:hover {
-            text-decoration: underline;
+        .user-header h1 {
+            font-size: 1.75rem;
+            color: #1e293b;
+            margin-bottom: 0.25rem;
+        }
+
+        .user-header p {
+            color: #64748b;
+            margin-bottom: 0.25rem;
         }
 
         .section {
-            margin-top: 2rem;
+            width: 100%;
+            max-width: 420px;
             padding: 1.5rem;
             background: #fff;
             border-radius: 8px;
             box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
-            max-width: 420px;
         }
 
         .section h2 {
             font-size: 1.25rem;
             margin-bottom: 1rem;
+            text-align: center;
         }
 
         .form-group {
@@ -66,13 +78,15 @@
         }
 
         .btn-submit {
-            padding: 0.6rem 1.25rem;
+            width: 100%;
+            padding: 0.61rem;
             background: #1e293b;
             color: #fff;
             border: none;
             border-radius: 6px;
             font-size: 1rem;
             cursor: pointer;
+            transition: background 0.2s;
         }
 
         .btn-submit:hover {
@@ -84,18 +98,26 @@
     <?= view('partials/sidebar') ?>
 
     <main class="main-content">
+        <!-- Informations d'en-tête centrées -->
+        <div class="user-header">
+            <h1>Bonjour, <?= esc($client[0]['nom']) ?>!</h1>
+            <p>N° <?= esc($prefixe['num']) ?><?= esc($client[0]['num']) ?></p>
+            <p>Votre solde actuel est : <strong><?= number_format($client[0]['solde'], 0, ',', ' ') ?> Ar</strong></p>
+        </div>
 
-        <h1>Bonjour, <?= esc($client[0]['nom']) ?>!</h1>
-        <p>Numero : <?= esc($prefixe['num']) ?><?= esc($client[0]['num']) ?></p>
-        <p>Votre solde actuel est : <strong><?= esc($client[0]['solde']) ?> Ar</strong></p>
-
+        <!-- Formulaire de retrait centré -->
         <section class="section" id="retrait">
+            <?php if (isset($error)){ ?>
+                <div class="alert alert-danger">
+                    <?= esc($error) ?>
+                </div>
+            <?php } ?>
             <h2>Faire un retrait</h2>
             <form action="/retrait" method="post">
                 <?= csrf_field() ?>
                 <div class="form-group">
                     <label for="montant_retrait">Montant (Ar)</label>
-                    <input type="number" id="montant_retrait" name="montant" min="1" step="1" required>
+                    <input type="number" id="montant_retrait" name="montant" min="1" step="1" required placeholder="Ex: 5000">
                 </div>
                 <button type="submit" class="btn-submit">Valider</button>
             </form>
