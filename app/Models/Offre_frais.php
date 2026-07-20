@@ -13,7 +13,7 @@ use CodeIgniter\Model;
             $sql = "SELECT frais.montant FROM frais JOIN offre_frais.id_frais = frais.id
                     JOIN offre On offre.id = offre_frais.id_offre WHERE offre_frais.id_frais=$id";
             $query = $db->query($sql);
-            $resutl = $query->getResultArray();
+            $result = $query->getResultArray();
             return $result;        
         }
     }
