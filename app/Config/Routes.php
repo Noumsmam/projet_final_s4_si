@@ -5,13 +5,13 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
-    $routes->get('/login', 'AuthController::form');
-    $routes->post('/login', 'AuthController::login');
-    $routes->get('/', 'LivresController::liste');
-    $routes->get('/livres/(:num)', 'LivresController::details/$1'); 
-    $routes->get('/recherche', 'LivresController::recherche');
-    $routes->post('/rechercher', 'LivresController::rechercher');
-    
+    // $routes->get('/login', 'AuthController::form');
+    // $routes->post('/login', 'AuthController::login');
+    // $routes->get('/', 'LivresController::liste');
+    // $routes->get('/livres/(:num)', 'LivresController::details/$1'); 
+    // $routes->get('/recherche', 'LivresController::recherche');
+    // $routes->post('/rechercher', 'LivresController::rechercher');
+    $routes->get('/depot','');
     $routes->group('', ['filter' => 'auth'], function($routes) {
         $routes->get('ajouter', 'LivresController::ajouter');
         $routes->post('creer', 'LivresController::creer');

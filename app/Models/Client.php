@@ -4,7 +4,7 @@ use CodeIgniter\Model;
 
     class Client extends Model
     {
-        protected $table = 'client';
+        protected $table = 'Client';
         protected $primaryKey = 'id';
-        protected $allowedFields = ['id_prefixe','numero','solde','nom'];
+        protected $allowedFields = ['id_prefixe','num','solde','nom'];
     }
