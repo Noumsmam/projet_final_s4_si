@@ -8,7 +8,7 @@ use CodeIgniter\Model;
         protected $primaryKey = 'id';
         protected $allowedFields = ['id_prefixe','numero','solde','nom'];
 
-        function checkSolde($id,$montant) {
+        public function checkSolde($id,$montant) {
             $client = new Client();
             $clientInf = $client->find($id);
             $solde = $clientInf['solde'];
@@ -18,4 +18,14 @@ use CodeIgniter\Model;
             }
             return $check;
         }
+
+        public function getSituationClient() {
+            $db = \Config\Database::connect();       
+            $sql = "SELECT Client.id,Client.nom,Client.num,Client.solde 
+                    Prefixe.num FROM Client JOIN prefixe ON Client.id_prefixe = prefixe.id";
+            $query = $db->query($sql);
+            $result = $query->getResultArray();
+            return $result;
+        }
+
     }

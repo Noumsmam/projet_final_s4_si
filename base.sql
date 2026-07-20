@@ -8,6 +8,7 @@ DROP TABLE IF EXISTS histo_transcaction;
 DROP TABLE IF EXISTS offre;
 DROP TABLE IF EXISTS frais;
 DROP TABLE IF EXISTS offre_frais;
+DROP TABLE IF EXISTS compte_operateur;
 
 -- 1. Table prefixe
 CREATE TABLE IF NOT EXISTS prefixe (
@@ -61,6 +62,13 @@ CREATE TABLE IF NOT EXISTS offre_frais (
     PRIMARY KEY (id_offre, id_frais),
     FOREIGN KEY (id_offre) REFERENCES offre(id) ON DELETE CASCADE,
     FOREIGN KEY (id_frais) REFERENCES frais(id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS compte_operateur (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    id_prefixe INTEGER NOT NULL,
+    solde REAL DEFAULT 0.0,
+    FOREIGN KEY (id_prefixe) REFERENCES prefixe(id) ON DELETE CASCADE
 );
 
 -- Transaction pour garantir l'intégrité des insertions
@@ -130,5 +138,11 @@ INSERT INTO operation (type) VALUES
 ('depot'),
 ('retrait'),
 ('transfert');
+
+COMMIT;
+
+BEGIN TRANSACTION;
+
+INSERT INTO compte_operateur (id_prefixe) VALUES (1);
 
 COMMIT;
