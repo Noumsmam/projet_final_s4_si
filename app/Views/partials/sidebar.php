@@ -49,11 +49,11 @@
 <nav class="fixed-menu">
     <h2>Menu</h2>
     <ul>
-        <li><a href="#">Voir le solde</a></li>
-        <li><a href="#depot">Faire un dépôt</a></li>
-        <li><a href="#">Faire un retrait</a></li>
-        <li><a href="#">Faire un transfert</a></li>
-        <li><a href="#">Voir les historiques</a></li>
+        <li><a href="/home">Voir le solde</a></li>
+        <li><a href="/depot">Faire un dépôt</a></li>
+        <li><a href="/retrait">Faire un retrait</a></li>
+        <li><a href="/transfert">Faire un transfert</a></li>
+        <li><a href="/historique">Voir les historiques</a></li>
         <li><a href="/logout">Se déconnecter</a></li>
     </ul>
 </nav>
