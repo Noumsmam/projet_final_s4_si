@@ -123,3 +123,12 @@ INSERT INTO Client (id_prefixe, num, solde, nom) VALUES
 ((SELECT id FROM prefixe WHERE num = '037'), '5554433', 100000.0, 'Razafy Heriniaina');
 
 COMMIT;
+
+BEGIN TRANSACTION;
+
+INSERT INTO operation (type) VALUES
+('depot'),
+('retrait'),
+('transfert');
+
+COMMIT;

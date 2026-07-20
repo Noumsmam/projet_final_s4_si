@@ -9,74 +9,65 @@ use CodeIgniter\I18n\Time;
 
 class OperationController extends BaseController
 {
- 	function depot($id,$montant){
+ 	function depot(){
+        $id = session()->get('id');
+        $montant = $this->request->getPost('montant');
         $client = new Client();
         $clientInf = $client->find($id);
-        $solde = $clientInf['solde'] + $montant;
-        $data=['solde' => $solde];
-        $client->update($id,$data);
+        $solde = $clientInf[0]['solde'] + $montant;
+        $client->where('id', $clientInf[0]['id'])->set(['solde' => $solde])->update();
         $historique = new Historique_transaction();
         $dataHisto = [
-            'id_client' => $id,
+            'id_client' => $clientInf[0]['id'],
             'montant' => $montant,
             'id_operation' => 1
         ];
-        $historique->save($data);
+        $historique->insert($dataHisto);
+        return redirect()->to('/home');
     }
 
-    function retrait($id,$montant){
-        $client = new Client();
-        $clientInf = $client->find($id);
-        $offre = new Offre();
-        $offreFrais = new Offre_frais();
-        $idOffre = $offre->checkOffre($montant);
-        $frais = $offreFrais->getFrais($idOffre);
-        if($client->checkSolde($id,$montant+$frais)){
-            $solde = $clientInf['solde'] - $montant - $frais;
-            $data=['solde' => $solde];
-            $client->update($id,$data);
-            $historique = new Historique_transaction();
-            $dataHisto = [
-                'id_client' => $id,
-                'montant' => $montant,
-                'id_operation' => 2
-            ];
-            $historique->save($dataHisto);
-        } else {
-            return view('home',['error' => 'fond insuffisant']);
-        }
-        return view('home');
-    }
+    public function retrait()
+    {
+        $id = session()->get('id');
+        $montant = (float) $this->request->getPost('montant');
 
-    function transfert($client2,$montant,$client1) {
-        $client = new Client();
-        $clientInf = $client->find($client1);
-        $offre = new Offre();
-        $offreFrais = new Offre_frais();
-        $idOffre = $offre->checkOffre($montant);
-        $frais = $offreFrais->getFrais($idOffre);
-        if($client->checkSolde($client1,$montant+$frais)) {
-            $solde1 = $clientInf['solde'] - $montant - $frais;
-            $data1 = ['solde' => $solde1];
-            $client->update($client1,$data1);
-            $historique = new Historique_transaction();
-            $dataHisto1 = [
-                'id_client' => $client1,
-                'montant' => $montant,
-                'id_operation' => 3
-            ];
-            $historique->save($dataHisto1);
+        $clientModel = new Client();
+        $clientInf = $clientModel->find($id);
 
-            $solde2 = $clientInf['solde'] + $montant;
-            $data2 = ['solde' => $solde2];
-            $client->update($client2,$data2);
-            $historique = new Historique_transaction();
-            $dataHisto2 = [
-                'id_client' => $client2,
-                'montant' => $montant,
-                'id_operation' => 1
-            ];
-            $historique->save($dataHisto2);
+        if (!$clientInf) {
+            return redirect()->back()->with('error', 'Client introuvable.');
         }
+
+        $offreModel = new Offre();
+        $offre = $offreModel->checkOffre($montant); 
+        
+        $idOffre = is_array($offre) ? ($offre['id'] ?? $offre[0]['id'] ?? null) : $offre;
+
+        $offreFraisModel = new Offre_frais();
+        $fraisData = $offreFraisModel->getFrais($idOffre);
+
+        $montantFrais = 0;
+        if (!empty($fraisData)) {
+            $montantFrais = (float) ($fraisData[0]['montant'] ?? $fraisData['montant'] ?? 0);
+        }
+
+        $coutTotal = $montant + $montantFrais;
+        $soldeActuel = (float) $clientInf[0]['solde'];
+
+        if ($soldeActuel < $coutTotal) {
+            return redirect()->back()->with('error', 'Solde insuffisant pour effectuer ce retrait.');
+        }
+
+        $nouveauSolde = $soldeActuel - $coutTotal;
+        $clientModel->update($clientInf[0]['id'], ['solde' => $nouveauSolde]);
+
+        $historiqueModel = new Historique_transaction();
+        $historiqueModel->save([
+            'id_client'    => $clientInf[0]['id'],
+            'montant'      => $montant,
+            'id_operation' => 2
+        ]);
+
+        return redirect()->to('/home')->with('success', 'Retrait effectué avec succès.');
     }
 }

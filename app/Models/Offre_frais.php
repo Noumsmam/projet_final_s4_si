@@ -1,19 +1,31 @@
 <?php
 namespace App\Models;
+
 use CodeIgniter\Model;
 
-    class Offre_frais extends Model
-    {
-        protected $table = 'offre_frais';
-        // protected $primaryKey = 'id';
-        protected $allowedFields = ['id_offre','id_frais'];
+class Offre_frais extends Model 
+{
+    protected $table = 'offre_frais';
+    protected $allowedFields = ['id_offre', 'id_frais'];
 
-        function getFrais($id) {
-            $db = \Config\Database::connect();
-            $sql = "SELECT frais.montant FROM frais JOIN offre_frais.id_frais = frais.id
-                    JOIN offre On offre.id = offre_frais.id_offre WHERE offre_frais.id_frais=$id";
-            $query = $db->query($sql);
-            $result = $query->getResultArray();
-            return $result;        
+    public function getFrais($id) 
+    {
+        // Si vous avez passé un tableau par erreur (ex: ['id' => 1]), on extrait la valeur
+        if (is_array($id)) {
+            $id = reset($id); // Récupère le premier élément du tableau
         }
+
+        $db = \Config\Database::connect();
+
+        // Correction de la syntaxe JOIN et utilisation des bindings (?)
+        $sql = "SELECT f.montant 
+                FROM frais f
+                JOIN offre_frais of ON of.id_frais = f.id
+                JOIN offre o ON o.id = of.id_offre 
+                WHERE of.id_frais = ?";
+
+        $query = $db->query($sql, [$id]);
+        
+        return $query->getResultArray();
     }
+}

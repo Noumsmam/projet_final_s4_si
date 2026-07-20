@@ -11,5 +11,7 @@ use CodeIgniter\Router\RouteCollection;
     $routes->group('', ['filter' => 'auth'], function($routes) {
         $routes->get('home', 'PageController::home');
         $routes->get('logout', 'AuthController::logout');
+        $routes->post('deposer', 'OperationController::depot');
+        $routes->post('retrait', 'OperationController::retrait');
     });
     
