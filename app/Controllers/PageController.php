@@ -14,4 +14,14 @@ class PageController extends BaseController
 
         return view('home', ['client' => $client, 'prefixe' => $prefixe]);
     }
+
+    // get situation mety mbola miampy le parametre azo fa reo no ananatsika 
+    public function getSituationAllCompte() {
+        $client = new Client();
+        $listeClient = $client->getSituationClient();
+    } 
+
+    public function getAllTransfert() {
+        
+    }
 }

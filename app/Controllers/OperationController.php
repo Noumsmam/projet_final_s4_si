@@ -6,6 +6,7 @@ use App\Models\Historique_transaction;
 use App\Models\Offre_frais;
 use App\Models\Prefixe;
 use App\Models\Frais;
+use App\Models\Compte_operateur; 
 use CodeIgniter\I18n\Time;
 
 class OperationController extends BaseController
@@ -108,10 +109,23 @@ class OperationController extends BaseController
             'montant'      => $montant,
             'id_operation' => 2
         ]);
+        $compte_operateur = new Compte_operateur();
+        $compteOpInfo = $compte_operateur->find(1);
+        $soldeOp = $montantFrais + $compteOpInfo['solde'];
+        $compte_operateur->update(1,['solde' => $soldeOp]);
 
         return redirect()->to('/retrait')->with('success', 'Retrait effectué avec succès.');
     }
-
+    
+    //ito fonction ito mbola tsy integrer 
+    // rehefa manao vu de ataovy montant ihany aloha fa aza asina an le numero an le client ray 
+    //fa tsy mbola tadiavina amin lay v1
+    /* 
+        |
+        |
+        |
+        v
+    */
     public function  transfert($client2,$montant){
         $id = session()->get('id');
         $client = new Client();
@@ -156,6 +170,11 @@ class OperationController extends BaseController
             'montant'      => $montant,
             'id_operation' => 3
         ]);
+
+        $compte_operateur = new Compte_operateur();
+        $compteOpInfo = $compte_operateur->find(1);
+        $soldeOp = $montantFrais + $compteOpInfo['solde'];
+        $compte_operateur->update(1,['solde' => $soldeOp]);
     } 
 
     function historique(){
