@@ -105,7 +105,6 @@ INSERT INTO offre_frais (id_offre, id_frais) VALUES
 (9, 9),
 (10, 10);
 
-<<<<<<< HEAD
 COMMIT;
 
 BEGIN TRANSACTION;
@@ -123,9 +122,4 @@ INSERT INTO Client (id_prefixe, num, solde, nom) VALUES
 ((SELECT id FROM prefixe WHERE num = '038'), '9876543', 75000.0, 'Ranaivo Sahondra'),
 ((SELECT id FROM prefixe WHERE num = '037'), '5554433', 100000.0, 'Razafy Heriniaina');
 
-=======
-INSERT INTO prefixe (num) VALUES ('034');
-
-INSERT INTO Client (id_prefixe,num,solde,nom) VALUES (1,'2760159',3000,'Nomena'); 
->>>>>>> nomena
 COMMIT;
