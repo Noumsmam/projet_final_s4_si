@@ -10,10 +10,10 @@ use CodeIgniter\Model;
 
         function checkOffre($montant) {
             $db = \Config\Database::connect();
-            $sql = "SELECT id FROM offre WHERE offre.montant_debut < $montatn
+            $sql = "SELECT id FROM offre WHERE offre.montant_debut < $montant
                     AND offre.montant_fin > $montant";
             $query = $db->query($sql);
-            $result = $query->getResultArray();
+            $result = $query->getResult();
             return $result;
         }
     }
