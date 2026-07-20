@@ -106,3 +106,20 @@ INSERT INTO offre_frais (id_offre, id_frais) VALUES
 (10, 10);
 
 COMMIT;
+
+BEGIN TRANSACTION;
+
+-- 1. Ajout de nouveaux préfixes dans la table prefixe
+INSERT INTO prefixe (num) VALUES
+('033'),
+('038'),
+('037');
+
+-- 2. Insertion de 3 clients associés à ces nouveaux préfixes
+-- (En utilisant `last_insert_rowid()` ou en ciblant l'ID du préfixe inséré)
+INSERT INTO Client (id_prefixe, num, solde, nom) VALUES
+((SELECT id FROM prefixe WHERE num = '033'), '1234567', 20000.0, 'Andria Toky'),
+((SELECT id FROM prefixe WHERE num = '038'), '9876543', 75000.0, 'Ranaivo Sahondra'),
+((SELECT id FROM prefixe WHERE num = '037'), '5554433', 100000.0, 'Razafy Heriniaina');
+
+COMMIT;

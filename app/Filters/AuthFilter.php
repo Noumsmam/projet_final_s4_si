@@ -10,8 +10,8 @@ class AuthFilter implements FilterInterface
 	{
 		$session = session();
 		// Si pas connecté → redirection login  
-		if (!$session->get('user')) {
-			return redirect()->to('/login')->with('erreur', 'Connectez-vous pour accéder à cette page');
+		if (!$session->get('client')) {
+			return redirect()->to('/')->with('erreur', 'Connectez-vous pour accéder à cette page');
 		}
 	}
 
