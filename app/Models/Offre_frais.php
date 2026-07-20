@@ -10,14 +10,10 @@ class Offre_frais extends Model
 
     public function getFrais($id) 
     {
-        // Si vous avez passé un tableau par erreur (ex: ['id' => 1]), on extrait la valeur
         if (is_array($id)) {
-            $id = reset($id); // Récupère le premier élément du tableau
+            $id = reset($id); 
         }
-
         $db = \Config\Database::connect();
-
-        // Correction de la syntaxe JOIN et utilisation des bindings (?)
         $sql = "SELECT f.montant 
                 FROM frais f
                 JOIN offre_frais of ON of.id_frais = f.id
