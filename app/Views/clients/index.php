@@ -50,6 +50,7 @@
                         <h1 class="hero-title" style="font-size: 2rem;">Gestion des clients</h1>
                         <p class="hero-subtitle">Liste de tous les comptes clients avec leurs soldes.</p>
                     </div>
+                    <a href="/logout" class="btn btn-outline">Déconnexion</a>
                     <a href="/gestion-clients/creer" class="btn btn-success">Nouveau client</a>
                 </div>
 

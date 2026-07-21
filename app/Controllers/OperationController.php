@@ -5,7 +5,7 @@ use App\Models\Offre;
 use App\Models\Historique_transaction;
 use App\Models\Offre_frais;
 use App\Models\Prefixe;
-use App\Models\Frais;
+use App\Models\Promotion;
 use App\Models\Compte_operateur; 
 use CodeIgniter\I18n\Time;
 
@@ -104,11 +104,15 @@ class OperationController extends BaseController
         v
     */
     public function  transfert(){
+        $Promo=new Promotion();
         $numClient2 = $this->request->getPost('numClient2');
         $montant = (float) $this->request->getPost('montant');
         $id = session()->get('id');
         $client = new Client();
         $clientInf1 = $client->find($id);
+        $prefixeModel = new Prefixe();
+        $pre2=substr($numClient2, 0, 3);
+        $prefixe = $prefixeModel->where('num', $pre2)->first();
         if (!$clientInf1) {
             return redirect()->back()->with('error', 'Client introuvable.');
         }
@@ -120,6 +124,9 @@ class OperationController extends BaseController
         $montantFrais = 0;
         if (!empty($fraisData)) {
             $montantFrais = (float) ($fraisData[0]['montant'] ?? 0);
+        }
+        if ($prefixe[0]['id']==$clientInf1[0]['id_prefixe']) {
+            
         }
         $coutTotal = $montant + $montantFrais;
         $soldeActuel = (float) $clientInf1[0]['solde'];
@@ -135,9 +142,6 @@ class OperationController extends BaseController
             'id_operation' => 3
         ]);
 
-        $prefixeModel = new Prefixe();
-        $pre2=substr($numClient2, 0, 3);
-        $prefixe = $prefixeModel->where('num', $pre2)->first();
         $numero2=substr($numClient2, 3);
         $clientInf2 = $client->where('num', $numero2)->first();
         if (!$clientInf2) {

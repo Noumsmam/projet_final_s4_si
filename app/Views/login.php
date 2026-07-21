@@ -11,7 +11,7 @@
         <div class="auth-layout fade-in">
             <section class="auth-hero">
                 <p class="page-kicker">Portail client</p>
-                <h1 class="hero-title">Accédez à votre compte bancaire avec une interface plus moderne.</h1>
+                <h1 class="hero-title">Mobile money</h1>
                 <p class="hero-subtitle">Connectez-vous avec votre numéro pour consulter votre solde, déposer, retirer et suivre vos opérations.</p>
                 <p class="side-note">Design unifié, lecture plus claire et saisie plus confortable sur mobile comme sur desktop.</p>
             </section>
@@ -26,8 +26,12 @@
                         <input type="text" id="numero" name="numero" required placeholder="Ex: 0331234567">
                         <p class="input-hint">Saisissez votre identifiant téléphonique complet.</p>
                     </div>
+
                     <div class="actions-row">
                         <button type="submit" class="btn-primary">Se connecter</button>
+                    </div>
+                    <div class="secondary-actions">
+                        <a href="/gestion-clients" class="link-operator">Mode opérateur</a>
                     </div>
                 </form>
             </section>

@@ -12,6 +12,7 @@ DROP TABLE IF EXISTS compte_operateur;
 DROP TABLE IF EXISTS operateur;
 DROP TABLE IF EXISTS operateur_prefixe;
 DROP TABLE IF EXISTS commission_operateur;
+DROP TABLE IF EXISTS promotion;
 
 -- 1. Table prefixe
 CREATE TABLE IF NOT EXISTS prefixe (
@@ -165,5 +166,21 @@ COMMIT;
 BEGIN TRANSACTION;
 
 INSERT INTO compte_operateur (id_prefixe) VALUES (1);
+
+COMMIT;
+
+CREATE TABLE IF NOT EXISTS promotion(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    id_prefixe INTEGER,
+    pourcentage REAL NOT NULL,
+    FOREIGN KEY (id_prefixe) REFERENCES prefixe(id)
+);
+
+BEGIN TRANSACTION;
+
+INSERT INTO promotion (id_prefixe, pourcentage) VALUES
+(1 ,10),
+(2, 50),
+(3, 30);
 
 COMMIT;
